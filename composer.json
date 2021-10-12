@@ -1,0 +1,24 @@
+{
+  "name": "ubermanu/kek",
+  "description": "Another PHP micro-framework",
+  "type": "library",
+  "license": "MIT",
+  "minimum-stability": "stable",
+  "authors": [
+    {
+      "name": "Manu",
+      "email": "manu@paca.happy-dev.fr"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Kek\\": "src/Kek/"
+    }
+  },
+  "require": {
+    "php": ">=8.0.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5"
+  }
+}
