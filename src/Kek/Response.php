@@ -1,6 +1,6 @@
 <?php
 
-namespace Kek\Framework;
+namespace Kek;
 
 class Response
 {
