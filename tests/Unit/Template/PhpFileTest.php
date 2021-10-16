@@ -1,6 +1,6 @@
 <?php
 
-final class PhpFile extends \PHPUnit\Framework\TestCase
+final class PhpFileTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers
@@ -11,6 +11,6 @@ final class PhpFile extends \PHPUnit\Framework\TestCase
         $filename = dirname(__FILE__) . '/files/php-template.phtml';
         $template = new \Kek\Template\PhpFile($filename);
 
-        $this->assertEquals('<h1>Hello World</h1>', $template->render(['someVar' => 'World']));
+        $this->assertEquals("<h1>Hello World</h1>\n", $template->render(['someVar' => 'World']));
     }
 }
