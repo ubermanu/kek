@@ -76,7 +76,7 @@ class App
         $request ??= new Request();
         $response = new Response();
 
-        $url = \parse_url($request->getUrl(), PHP_URL_PATH);
+        $url = \parse_url($request->getUri(), PHP_URL_PATH);
         $method = $request->getMethod();
         $method = (Request::METHOD_HEAD == $method) ? Request::METHOD_GET : $method;
 

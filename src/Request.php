@@ -23,6 +23,36 @@ class Request
     protected ?array $formData = null;
 
     /**
+     * @var string|null
+     */
+    protected ?string $method = null;
+
+    /**
+     * @var string|null
+     */
+    protected ?string $uri = null;
+
+    /**
+     * @var string|null
+     */
+    protected ?string $path = null;
+
+    /**
+     * @var string|null
+     */
+    protected ?string $protocol = null;
+
+    /**
+     * @param string|null $method
+     * @param string|null $uri
+     */
+    public function __construct(?string $method = null, ?string $uri = null)
+    {
+        $this->method ??= $method;
+        $this->uri ??= $uri;
+    }
+
+    /**
      * @param string $key
      * @param mixed|null $default
      * @return mixed
@@ -49,7 +79,20 @@ class Request
      */
     public function getProtocol(): string
     {
-        return $this->getServer('HTTP_X_FORWARDED_PROTO', $this->getServer('REQUEST_SCHEME', 'https'));
+        if ($this->protocol === null) {
+            $this->protocol = $this->getServer('HTTP_X_FORWARDED_PROTO', $this->getServer('REQUEST_SCHEME', 'https'));
+        }
+        return $this->protocol;
+    }
+
+    /**
+     * @param string $protocol
+     * @return $this
+     */
+    public function setProtocol(string $protocol): self
+    {
+        $this->protocol = $protocol;
+        return $this;
     }
 
     /**
@@ -65,15 +108,41 @@ class Request
      */
     public function getMethod(): string
     {
-        return $this->getServer('REQUEST_METHOD', 'UNKNOWN');
+        if ($this->method === null) {
+            $this->method = $this->getServer('REQUEST_METHOD', 'UNKNOWN');
+        }
+        return $this->method;
+    }
+
+    /**
+     * @param string $method
+     * @return $this
+     */
+    public function setMethod(string $method): self
+    {
+        $this->method = $method;
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getUrl(): string
+    public function getUri(): string
     {
-        return $this->getServer('REQUEST_URI', '');
+        if ($this->uri === null) {
+            $this->uri = $this->getServer('REQUEST_URI', '');
+        }
+        return $this->uri;
+    }
+
+    /**
+     * @param string $uri
+     * @return $this
+     */
+    public function setUri(string $uri): self
+    {
+        $this->uri = $uri;
+        return $this;
     }
 
     /**
@@ -85,6 +154,17 @@ class Request
     {
         $headers = $this->generateHeaders();
         return (isset($headers[$key])) ? $headers[$key] : $default;
+    }
+
+    /**
+     * @param string $key
+     * @param string $value
+     * @return $this
+     */
+    public function setHeader(string $key, string $value): self
+    {
+        $this->headers[$key] = $value;
+        return $this;
     }
 
     /**
