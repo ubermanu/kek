@@ -10,6 +10,11 @@ class App
     protected array $routes = [];
 
     /**
+     * @var callable
+     */
+    protected $errorHandler;
+
+    /**
      * @param string $timezone
      */
     public function __construct(string $timezone = 'UTC')
@@ -52,8 +57,19 @@ class App
     }
 
     /**
+     * @param callable $action
+     * @return $this
+     */
+    public function error(callable $action): self
+    {
+        $this->errorHandler = $action;
+        return $this;
+    }
+
+    /**
      * @param Request|null $request
      * @return Response
+     * @throws \Throwable
      */
     public function execute(?Request $request = null): Response
     {
@@ -104,15 +120,21 @@ class App
 
         $arguments = [$request, $params];
 
-        foreach ($matchedRoute->getMiddlewares() as $middleware) {
-            \call_user_func_array($middleware, $arguments);
+        try {
+            foreach ($matchedRoute->getMiddlewares() as $middleware) {
+                \call_user_func_array($middleware, $arguments);
+            }
+            $result = \call_user_func_array($matchedRoute->getAction(), $arguments);
+
+        } catch (\Throwable $e) {
+            if (is_callable($this->errorHandler)) {
+                $result = \call_user_func_array($this->errorHandler, [$e, $request, $response]);
+                $response->setStatusCode(500);
+            } else {
+                throw $e;
+            }
         }
 
-        $result = \call_user_func_array($matchedRoute->getAction(), $arguments);
-        if ($result instanceof Response) {
-            return $result;
-        }
-
-        return $response->setBody($result);
+        return $result instanceof Response ? $result : $response->setBody($result);
     }
 }

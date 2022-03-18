@@ -20,6 +20,11 @@ class Response
     protected string $body = '';
 
     /**
+     * @var int
+     */
+    protected int $statusCode = 200;
+
+    /**
      * @param float $time
      */
     public function __construct(float $time = 0.0)
@@ -44,6 +49,24 @@ class Response
     public function getContentType(): string
     {
         return $this->contentType;
+    }
+
+    /**
+     * @param int $code
+     * @return $this
+     */
+    public function setStatusCode(int $code): self
+    {
+        $this->statusCode = $code;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatusCode(): int
+    {
+        return $this->statusCode;
     }
 
     /**
