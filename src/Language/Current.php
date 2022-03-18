@@ -12,7 +12,7 @@ class Current
     /**
      * @var string The current language
      */
-    public static string $code;
+    protected static string $code;
 
     /**
      * @var Locale[]
@@ -25,26 +25,27 @@ class Current
      */
     public function __construct(string $lang = 'en_US')
     {
-        $this->addLocale(new Locale($lang));
-        $this->useLanguage($lang);
-    }
-
-    /**
-     * @return Locale|null
-     */
-    protected function getLocale(): ?Locale
-    {
-        return self::$locales[self::$code] ?? null;
+        $this->add(new Locale($lang));
+        $this->set($lang);
     }
 
     /**
      * @param Locale $locale
      * @return $this
      */
-    public function addLocale(Locale $locale): self
+    public function add(Locale $locale): self
     {
         self::$locales[$locale->getCode()] = $locale;
         return $this;
+    }
+
+    /**
+     * @param string|null $lang
+     * @return Locale|null
+     */
+    protected function get(?string $lang = null): ?Locale
+    {
+        return self::$locales[$lang ?? self::$code] ?? null;
     }
 
     /**
@@ -52,7 +53,7 @@ class Current
      * @return $this
      * @throws Exception
      */
-    public function useLanguage(string $lang): self
+    public function set(string $lang): self
     {
         if (!isset(self::$locales[$lang])) {
             throw new Exception("Language '$lang' is not supported");
@@ -68,6 +69,6 @@ class Current
      */
     public function translate(string $key): string
     {
-        return $this->getLocale()->translate($key);
+        return $this->get()->translate($key);
     }
 }

@@ -13,12 +13,11 @@ final class CurrentTest extends \PHPUnit\Framework\TestCase
 
         $locale = new \Kek\Language\Locale('fr');
         $locale->addTranslations(['Hello' => 'Bonjour']);
-        $current->addLocale($locale);
+        $current->add($locale);
 
         $this->assertEquals('Hello', $current->translate('Hello'));
 
-        $current->useLanguage('fr');
-
+        $current->set('fr');
         $this->assertEquals('Bonjour', $current->translate('Hello'));
     }
 }
