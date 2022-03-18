@@ -12,10 +12,10 @@
   ],
   "autoload": {
     "psr-4": {
-      "Kek\\": "src/Kek/"
+      "Kek\\": "src/"
     },
     "files": [
-      "src/Kek/functions.php"
+      "src/functions.php"
     ]
   },
   "require": {
