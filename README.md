@@ -1,5 +1,7 @@
 # Kek
 
+[![Tests](https://github.com/ubermanu/kek/actions/workflows/tests.yml/badge.svg)](https://github.com/ubermanu/kek/actions/workflows/tests.yml)
+
 Another small micro framework.
 
 ## Install
