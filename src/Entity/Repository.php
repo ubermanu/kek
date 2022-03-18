@@ -103,6 +103,9 @@ class Repository
             throw new CouldNotSaveException();
         }
 
+        // Update the entity with the new ID
+        $entity->setData($this->primaryKey, $this->db->lastInsertId());
+
         return true;
     }
 
