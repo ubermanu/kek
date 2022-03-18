@@ -5,7 +5,7 @@ namespace Kek\Language;
 use Kek\Exception;
 use Kek\Traits\Singleton;
 
-class Current
+final class Current
 {
     use Singleton;
 
@@ -26,7 +26,7 @@ class Current
     public function __construct(string $lang = 'en_US')
     {
         $this->add(new Locale($lang));
-        $this->set($lang);
+        $this->use($lang);
     }
 
     /**
@@ -53,7 +53,7 @@ class Current
      * @return $this
      * @throws Exception
      */
-    public function set(string $lang): self
+    public function use(string $lang): self
     {
         if (!isset(self::$locales[$lang])) {
             throw new Exception("Language '$lang' is not supported");

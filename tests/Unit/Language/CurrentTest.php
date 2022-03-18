@@ -17,7 +17,7 @@ final class CurrentTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals('Hello', $current->translate('Hello'));
 
-        $current->set('fr');
+        $current->use('fr');
         $this->assertEquals('Bonjour', $current->translate('Hello'));
     }
 }
