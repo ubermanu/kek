@@ -13,7 +13,10 @@
   "autoload": {
     "psr-4": {
       "Kek\\": "src/Kek/"
-    }
+    },
+    "files": [
+      "src/Kek/functions.php"
+    ]
   },
   "require": {
     "php": ">=8.0.0"
