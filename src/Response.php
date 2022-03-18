@@ -52,6 +52,14 @@ class Response
     }
 
     /**
+     * @return int
+     */
+    public function getContentLength(): int
+    {
+        return \strlen($this->body);
+    }
+
+    /**
      * @param int $code
      * @return $this
      */
