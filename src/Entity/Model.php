@@ -4,9 +4,6 @@ namespace Kek\Entity;
 
 use Kek\Traits\DataObject;
 
-/**
- * @method int getId()
- */
 abstract class Model
 {
     use DataObject;
@@ -54,6 +51,7 @@ abstract class Model
 
     /**
      * @return bool
+     * @throws CannotDeleteException
      */
     public function delete(): bool
     {

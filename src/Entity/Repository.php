@@ -113,7 +113,7 @@ class Repository
      */
     public function delete(Model $entity): bool
     {
-        return $this->deleteById($entity->getId());
+        return $this->deleteById($entity->getData($this->primaryKey));
     }
 
     /**
