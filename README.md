@@ -15,5 +15,6 @@ require_once 'vendor/autoload.php';
 
 $app = new \Kek\App();
 $app->get('/ping', fn() => 'pong');
-$app->listen();
+
+echo $app->execute()->getBody();
 ```

@@ -52,12 +52,12 @@ class App
     }
 
     /**
-     * @param Request $request
+     * @param Request|null $request
      * @return Response
-     * @internal
      */
-    public function execute(Request $request): Response
+    public function execute(?Request $request = null): Response
     {
+        $request ??= new Request();
         $response = new Response();
 
         $url = \parse_url($request->getUrl(), PHP_URL_PATH);
@@ -114,17 +114,5 @@ class App
         }
 
         return $response->setBody($result);
-    }
-
-    /**
-     * Generate a new request and process it.
-     *
-     * @return $this
-     */
-    public function listen(): self
-    {
-        $response = $this->execute(new Request());
-        echo $response->getBody();
-        return $this;
     }
 }
