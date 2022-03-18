@@ -44,6 +44,15 @@ class Relational implements Database
     }
 
     /**
+     * @param string $sql
+     * @return \PDOStatement|bool
+     */
+    public function prepare(string $sql): \PDOStatement|bool
+    {
+        return $this->connection->prepare($sql);
+    }
+
+    /**
      * @return string|bool
      */
     public function lastInsertId(): string|bool

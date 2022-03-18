@@ -21,6 +21,12 @@ interface Database
     public function query(string $sql): mixed;
 
     /**
+     * @param string $sql
+     * @return mixed
+     */
+    public function prepare(string $sql): mixed;
+
+    /**
      * @return false|int
      */
     public function lastInsertId(): mixed;
