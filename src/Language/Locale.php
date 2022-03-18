@@ -48,4 +48,16 @@ class Locale
     {
         return $this->translations[$key] ?? $key;
     }
+
+    /**
+     * Load translations from a PHP file.
+     *
+     * @param string $file
+     * @return $this
+     */
+    public function load(string $file): self
+    {
+        $this->addTranslations(require $file);
+        return $this;
+    }
 }
