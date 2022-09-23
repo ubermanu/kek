@@ -24,7 +24,7 @@ abstract class Model
     protected Repository $repository;
 
     /**
-     * @var array
+     * @param array $data
      */
     public function __construct(array $data = [])
     {
@@ -35,7 +35,7 @@ abstract class Model
     /**
      * @return void
      */
-    protected function __initialize()
+    protected function __initialize(): void
     {
         $this->repository = new Repository(null, $this, $this->table, $this->primaryKey);
     }

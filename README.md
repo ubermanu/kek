@@ -19,8 +19,8 @@ Another small micro framework.
 ```php
 require_once 'vendor/autoload.php';
 
-$app = new \Kek\App();
+$app = app();
 $app->get('/ping', fn() => 'pong');
 
-echo $app->execute()->getBody();
+echo $app->exec()->body();
 ```

@@ -32,7 +32,7 @@ class Route
     /**
      * @return callable
      */
-    public function getAction(): callable
+    public function action(): callable
     {
         return $this->action;
     }
@@ -40,7 +40,7 @@ class Route
     /**
      * @return string
      */
-    public function getPath(): string
+    public function path(): string
     {
         return $this->path;
     }
@@ -49,7 +49,7 @@ class Route
      * @param callable $resource
      * @return $this
      */
-    public function addMiddleware(callable $resource): self
+    public function middleware(callable $resource): Route
     {
         $this->middlewares[] = $resource;
         return $this;
@@ -58,7 +58,7 @@ class Route
     /**
      * @return callable[]
      */
-    public function getMiddlewares(): array
+    public function middlewares(): array
     {
         return $this->middlewares;
     }

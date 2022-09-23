@@ -16,7 +16,7 @@ require_once 'vendor/autoload.php';
 $app = new \Kek\App();
 $app->get('/', fn() => 'Hello world!');
 
-echo $app->execute()->getBody();
+echo $app->exec()->body();
 ```
 
 Run this example using the built-in PHP server:

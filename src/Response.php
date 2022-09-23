@@ -90,7 +90,7 @@ class Response
     /**
      * @return string
      */
-    public function getBody(): string
+    public function body(): string
     {
         return $this->body;
     }

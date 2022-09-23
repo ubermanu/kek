@@ -29,7 +29,7 @@ class App
      * @return Route
      * @internal
      */
-    public function addRoute(string $method, string $path, callable $action): Route
+    public function route(string $method, string $path, callable $action): Route
     {
         $route = new Route($path, $action);
         $this->routes[$method][$path] = $route;
@@ -43,7 +43,7 @@ class App
      */
     public function get(string $path, callable $action): Route
     {
-        return $this->addRoute(Request::METHOD_GET, $path, $action);
+        return $this->route(Request::METHOD_GET, $path, $action);
     }
 
     /**
@@ -53,7 +53,7 @@ class App
      */
     public function post(string $path, callable $action): Route
     {
-        return $this->addRoute(Request::METHOD_POST, $path, $action);
+        return $this->route(Request::METHOD_POST, $path, $action);
     }
 
     /**
@@ -71,7 +71,7 @@ class App
      * @return Response
      * @throws \Throwable
      */
-    public function execute(?Request $request = null): Response
+    public function exec(?Request $request = null): Response
     {
         $request ??= new Request();
         $response = new Response();
@@ -102,7 +102,7 @@ class App
             break;
         }
 
-        if ($matchedRoute instanceof Route && ('/' === $matchedRoute->getPath()) && ($url != $matchedRoute->getPath())) {
+        if ($matchedRoute instanceof Route && ('/' === $matchedRoute->path()) && ($url != $matchedRoute->path())) {
             return $response;
         }
 
@@ -111,7 +111,7 @@ class App
         }
 
         // Combine keys and values to one array
-        $url = $matchedRoute->getPath();
+        $url = $matchedRoute->path();
         $keys = [];
         $keyRegex = '@^' . \preg_replace('@:[^/]+@', ':([^/]+)', $url) . '$@';
         \preg_match($keyRegex, $url, $keys);
@@ -121,10 +121,10 @@ class App
         $arguments = [$request, $params];
 
         try {
-            foreach ($matchedRoute->getMiddlewares() as $middleware) {
+            foreach ($matchedRoute->middlewares() as $middleware) {
                 \call_user_func_array($middleware, $arguments);
             }
-            $result = \call_user_func_array($matchedRoute->getAction(), $arguments);
+            $result = \call_user_func_array($matchedRoute->action(), $arguments);
 
         } catch (\Throwable $e) {
             if (is_callable($this->errorHandler)) {

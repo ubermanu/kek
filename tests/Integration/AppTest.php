@@ -6,7 +6,6 @@ class AppTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers
-     * @throws \Throwable
      */
     public function testGetRoute()
     {
@@ -14,6 +13,6 @@ class AppTest extends \PHPUnit\Framework\TestCase
         $app->get('/', fn() => 'Hello World');
         $req = new \Kek\Request('GET', '/');
 
-        $this->assertEquals('Hello World', $app->execute($req)->getBody());
+        $this->assertEquals('Hello World', $app->exec($req)->body());
     }
 }
