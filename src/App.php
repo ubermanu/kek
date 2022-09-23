@@ -128,7 +128,7 @@ class App
         } catch (\Throwable $e) {
             if (is_callable($this->errorHandler)) {
                 $result = \call_user_func_array($this->errorHandler, [$e, $request, $response]);
-                $response->statusCode = 500;
+                $response->code = 500;
             } else {
                 throw $e;
             }
