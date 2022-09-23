@@ -6,8 +6,10 @@ class AppTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers
+     * @return void
+     * @throws \Throwable
      */
-    public function testGetRoute()
+    public function testGetRoute(): void
     {
         $app = new \Kek\App();
         $app->get('/', fn() => 'Hello World');
