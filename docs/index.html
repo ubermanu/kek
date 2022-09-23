@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>KEK</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="Another PHP microframework" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+    <link rel="shortcut icon" href="images/kek-logo.svg" />
+    <link
+            rel="stylesheet"
+            href="//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --theme-color: #4fb0c6;
+        }
+
+        .app-name-link {
+            display: block;
+        }
+
+        .app-name-link > img {
+            width: 30%;
+            transition: transform 0.5s ease;
+        }
+
+        .app-name-link > p {
+            margin: 0;
+            color: var(--base-color);
+            font-family: 'Open Sans', sans-serif;
+            transition: transform 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+    window.$docsify = {
+        name: '<img src="images/kek-logo-alt.svg" alt><p>KEK</p>',
+        repo: 'https://github.com/ubermanu/kek',
+        loadSidebar: true,
+        auto2top: true,
+        copyCode: {
+            buttonText: '<img src="images/icon-copy.svg" alt aria-hidden="true">'
+        }
+    }
+</script>
+<!-- Docsify v4 -->
+<script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+<script src="//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/js/docsify-themeable.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
+</body>
+</html>

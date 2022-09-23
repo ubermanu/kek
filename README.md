@@ -2,6 +2,12 @@
 
 [![Tests](https://github.com/ubermanu/kek/actions/workflows/tests.yml/badge.svg)](https://github.com/ubermanu/kek/actions/workflows/tests.yml)
 
+<br>
+<p align="center">
+    <img src="docs/images/kek-logo.svg" alt width="120">
+</p>
+<br>
+
 Another small micro framework.
 
 ## Install
