@@ -7,22 +7,22 @@ class Response
     /**
      * @var float
      */
-    protected float $startTime;
+    public float $startTime;
 
     /**
      * @var string
      */
-    protected string $contentType;
+    public string $contentType;
 
     /**
      * @var string
      */
-    protected string $body = '';
+    public string $body = '';
 
     /**
      * @var int
      */
-    protected int $statusCode = 200;
+    public int $statusCode = 200;
 
     /**
      * @param float $time
@@ -33,65 +33,10 @@ class Response
     }
 
     /**
-     * @param string $type
-     * @param string $charset
-     * @return $this
-     */
-    public function setContentType(string $type, string $charset): self
-    {
-        $this->contentType = $type . ((!empty($charset) ? '; charset=' . $charset : ''));
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getContentType(): string
-    {
-        return $this->contentType;
-    }
-
-    /**
      * @return int
      */
-    public function getContentLength(): int
+    public function length(): int
     {
         return \strlen($this->body);
-    }
-
-    /**
-     * @param int $code
-     * @return $this
-     */
-    public function setStatusCode(int $code): self
-    {
-        $this->statusCode = $code;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getStatusCode(): int
-    {
-        return $this->statusCode;
-    }
-
-    /**
-     * @param string $body
-     * @return $this
-     */
-    public function setBody(string $body): self
-    {
-        $this->body = $body;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function body(): string
-    {
-        return $this->body;
     }
 }

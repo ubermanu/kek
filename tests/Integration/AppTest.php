@@ -13,6 +13,6 @@ class AppTest extends \PHPUnit\Framework\TestCase
         $app->get('/', fn() => 'Hello World');
         $req = new \Kek\Request('GET', '/');
 
-        $this->assertEquals('Hello World', $app->exec($req)->body());
+        $this->assertEquals('Hello World', $app->exec($req)->body);
     }
 }

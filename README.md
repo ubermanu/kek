@@ -22,5 +22,5 @@ require_once 'vendor/autoload.php';
 $app = app();
 $app->get('/ping', fn() => 'pong');
 
-echo $app->exec()->body();
+echo $app->run()->body; // pong
 ```

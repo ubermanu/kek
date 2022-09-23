@@ -60,20 +60,19 @@ class App
      * @param callable $action
      * @return $this
      */
-    public function error(callable $action): self
+    public function error(callable $action): App
     {
         $this->errorHandler = $action;
         return $this;
     }
 
     /**
-     * @param Request|null $request
+     * @param Request $request
      * @return Response
      * @throws \Throwable
      */
-    public function exec(?Request $request = null): Response
+    public function exec(Request $request): Response
     {
-        $request ??= new Request();
         $response = new Response();
 
         $url = \parse_url($request->getUri(), PHP_URL_PATH);
@@ -102,7 +101,7 @@ class App
             break;
         }
 
-        if ($matchedRoute instanceof Route && ('/' === $matchedRoute->path()) && ($url != $matchedRoute->path())) {
+        if ($matchedRoute instanceof Route && ('/' === $matchedRoute->path) && ($url != $matchedRoute->path)) {
             return $response;
         }
 
@@ -111,7 +110,7 @@ class App
         }
 
         // Combine keys and values to one array
-        $url = $matchedRoute->path();
+        $url = $matchedRoute->path;
         $keys = [];
         $keyRegex = '@^' . \preg_replace('@:[^/]+@', ':([^/]+)', $url) . '$@';
         \preg_match($keyRegex, $url, $keys);
@@ -121,20 +120,35 @@ class App
         $arguments = [$request, $params];
 
         try {
-            foreach ($matchedRoute->middlewares() as $middleware) {
+            foreach ($matchedRoute->middlewares as $middleware) {
                 \call_user_func_array($middleware, $arguments);
             }
-            $result = \call_user_func_array($matchedRoute->action(), $arguments);
+            $result = \call_user_func_array($matchedRoute->action, $arguments);
 
         } catch (\Throwable $e) {
             if (is_callable($this->errorHandler)) {
                 $result = \call_user_func_array($this->errorHandler, [$e, $request, $response]);
-                $response->setStatusCode(500);
+                $response->statusCode = 500;
             } else {
                 throw $e;
             }
         }
 
-        return $result instanceof Response ? $result : $response->setBody($result);
+        if ($result instanceof Response) {
+            return $result;
+        }
+
+        $response->body = $result;
+
+        return $response;
+    }
+
+    /**
+     * @return Response
+     * @throws \Throwable
+     */
+    public function run(): Response
+    {
+        return $this->exec(new Request());
     }
 }

@@ -13,10 +13,11 @@ Create a small API endpoint:
 ```php
 require_once 'vendor/autoload.php';
 
-$app = new \Kek\App();
+$app = app();
 $app->get('/', fn() => 'Hello world!');
 
-echo $app->exec()->body();
+// Run the app and print the response
+echo $app->run()->body;
 ```
 
 Run this example using the built-in PHP server:
