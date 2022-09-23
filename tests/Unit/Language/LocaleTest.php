@@ -1,12 +1,14 @@
 <?php
 
-final class LocaleTest extends \PHPUnit\Framework\TestCase
+namespace Kek\Tests\Unit\Language;
+
+class LocaleTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers
      * @return void
      */
-    public function testTranslate()
+    public function testTranslate(): void
     {
         $locale = new \Kek\Language\Locale('fr');
         $locale->addTranslations(['Hello' => 'Bonjour']);
@@ -18,7 +20,7 @@ final class LocaleTest extends \PHPUnit\Framework\TestCase
      * @covers
      * @return void
      */
-    public function testMissingTranslation()
+    public function testMissingTranslation(): void
     {
         $locale = new \Kek\Language\Locale('fr');
         $locale->addTranslations(['Hello' => 'Bonjour']);
@@ -34,7 +36,7 @@ final class LocaleTest extends \PHPUnit\Framework\TestCase
      * @return void
      * @dataProvider loadDataProvider
      */
-    public function testLoad(string $lang, string $file, string $expected)
+    public function testLoad(string $lang, string $file, string $expected): void
     {
         $locale = new \Kek\Language\Locale($lang);
         $locale->load($file);

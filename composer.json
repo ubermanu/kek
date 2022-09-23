@@ -18,6 +18,11 @@
       "src/functions.php"
     ]
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Kek\\Tests\\": "tests/"
+    }
+  },
   "require": {
     "php": ">=8.0.0",
     "ext-mbstring": "*",

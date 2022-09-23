@@ -1,10 +1,12 @@
 <?php
 
-final class AppTest extends \PHPUnit\Framework\TestCase
+namespace Kek\Tests\Integration;
+
+class AppTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers
-     * @throws Throwable
+     * @throws \Throwable
      */
     public function testGetRoute()
     {

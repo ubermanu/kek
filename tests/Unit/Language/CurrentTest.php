@@ -1,13 +1,15 @@
 <?php
 
-final class CurrentTest extends \PHPUnit\Framework\TestCase
+namespace Kek\Tests\Unit\Language;
+
+class CurrentTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers
      * @return void
-     * @throws Throwable
+     * @throws \Throwable
      */
-    public function testCurrentLangTranslation()
+    public function testCurrentLangTranslation(): void
     {
         $current = \Kek\Language\Current::instance();
 

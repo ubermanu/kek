@@ -1,11 +1,14 @@
 <?php
 
-final class MemoryTest extends \PHPUnit\Framework\TestCase
+namespace Kek\Tests\Unit\Cache;
+
+class MemoryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers
+     * @return void
      */
-    public function testCanSaveAndRemove()
+    public function testCanSaveAndRemove(): void
     {
         $cache = new \Kek\Cache\Memory();
         $id = '1634393170';
@@ -19,8 +22,9 @@ final class MemoryTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @covers
+     * @return void
      */
-    public function testCanExpire()
+    public function testCanExpire():void
     {
         $cache = new \Kek\Cache\Memory();
         $id = '1634393446';

@@ -1,12 +1,15 @@
 <?php
 
-final class PhpFileTest extends \PHPUnit\Framework\TestCase
+namespace Kek\Tests\Unit\Template;
+
+class PhpFileTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers
+     * @return void
      * @throws \Kek\Exception
      */
-    public function testRendersProperly()
+    public function testRendersProperly(): void
     {
         $filename = dirname(__FILE__) . '/_files/php-template.phtml';
         $template = new \Kek\Template\PhpFile($filename);
